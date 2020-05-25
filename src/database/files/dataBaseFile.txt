@@ -1,0 +1,1 @@
+database=C:\Users\Penka\eclipse-workspace\FlowerShop\src\database\files\FlowerShopDB;
