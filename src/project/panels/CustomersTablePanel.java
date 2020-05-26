@@ -197,7 +197,7 @@ public class CustomersTablePanel extends JPanel {
 					MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 					OrdersTablePanel.refreshComboCustomers();
 				} catch (JdbcSQLException e1) {
-					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+					JOptionPane.showMessageDialog(null, "Некоректни данни! ", null,
 							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -238,7 +238,7 @@ public class CustomersTablePanel extends JPanel {
 				MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 				OrdersTablePanel.refreshComboCustomers();
 			} catch (JdbcSQLException e1) {
-				JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+				JOptionPane.showMessageDialog(null, "Некоректни данни! ", null,
 						JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
