@@ -23,26 +23,25 @@ public class DoubleSearchPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JTable doubleTable = new JTable();
-	JScrollPane scroller = new JScrollPane(doubleTable);
+	private JTable doubleTable = new JTable();
+	private JScrollPane scroller = new JScrollPane(doubleTable);
 
-	JPanel upPanel = new JPanel();
-	JPanel midPanel = new JPanel();
-	JPanel downPanel = new JPanel();
+	private JPanel upPanel = new JPanel();
+	private JPanel midPanel = new JPanel();
+	private JPanel downPanel = new JPanel();
 
-	JButton searchButton = new JButton("Търсене по фамилно име на клиент и категория на продукт: ");
+	private JButton searchButton = new JButton("Търсене по фамилно име на клиент и категория на продукт: ");
 
-	JLabel fnameLabel = new JLabel("Фамилно име на клиент:");
-	JTextField fnameTField = new JTextField();
-	JLabel categoryLabel = new JLabel("Категория на продукт:");
-	String[] categories = { "Букети", "Кошници", "Саксии", "Градински растения", "Стайни растения" };
-	JComboBox<String> categoryCombo = new JComboBox<>(categories);
+	private JLabel fnameLabel = new JLabel("Фамилно име на клиент:");
+	private JTextField fnameTField = new JTextField();
+	private JLabel categoryLabel = new JLabel("Категория на продукт:");
+	private String[] categories = { "Букети", "Кошници", "Саксии", "Градински растения", "Стайни растения" };
+	private JComboBox<String> categoryCombo = new JComboBox<>(categories);
 
-	Connection conn = null;
-	PreparedStatement state = null;
-	ResultSet result = null;
-	MyModel model = null;
-	int id = -1; // selected id
+	private Connection conn = null;
+	private PreparedStatement state = null;
+	private ResultSet result = null;
+	private MyModel model = null;
 
 	public DoubleSearchPanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
 		this.conn = conn;
@@ -91,23 +90,6 @@ public class DoubleSearchPanel extends JPanel {
 			}
 		}
 
-		@SuppressWarnings("finally")
-//		private MyModel getFromTableOrders() {
-//			conn = DBConnector.getConnection();
-//			String sql = "select fname, lname, unitprice, quantity, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id;";
-//			try {
-//				state = conn.prepareStatement(sql);
-//				result = state.executeQuery();
-//				model = new MyModel(result);
-//			} catch (SQLException e) {
-//				e.printStackTrace();
-//			} catch (Exception e) {
-//				e.printStackTrace();
-//			} finally {
-//				return model;
-//			}
-//		}
-		
 		private void clearDoubleSearchForm() {
 			fnameTField.setText("");
 			categoryCombo.setSelectedIndex(0);

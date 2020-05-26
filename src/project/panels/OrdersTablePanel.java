@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -18,9 +17,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.h2.jdbc.JdbcSQLException;
@@ -37,35 +34,35 @@ public class OrdersTablePanel extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	JScrollPane scroller = new JScrollPane(MyFrame.ordersTable);
+	private JScrollPane scroller = new JScrollPane(MyFrame.ordersTable);
 
-	JPanel upPanel = new JPanel();
-	JPanel midPanel = new JPanel();
-	JPanel downPanel = new JPanel();
+	private JPanel upPanel = new JPanel();
+	private JPanel midPanel = new JPanel();
+	private JPanel downPanel = new JPanel();
 
-	JButton addButton = new JButton("Добави");
-	JButton delButton = new JButton("Изтрий");
-	JButton editButton = new JButton("Редактирай");
-	JButton searchButton = new JButton("Търсене по количество");
-	JButton refreshButton = new JButton("Обнови");
+	private JButton addButton = new JButton("Добави");
+	private JButton delButton = new JButton("Изтрий");
+	private JButton editButton = new JButton("Редактирай");
+	private JButton searchButton = new JButton("Търсене по количество");
+	private JButton refreshButton = new JButton("Обнови");
 
-	JLabel itemsLabel = new JLabel("Моля, изберете артикул: ");
-	static String[] items = { "Item1", "Item2" };
-	static JComboBox<String> itemCombo = new JComboBox<>(items);
-	JLabel quantityLabel = new JLabel("Брой артикули: ");
-	JTextField quantityTField = new JTextField();
+	private JLabel itemsLabel = new JLabel("Моля, изберете артикул: ");
+	private static String[] items = { "Item1", "Item2" };
+	private static JComboBox<String> itemCombo = new JComboBox<>(items);
+	private JLabel quantityLabel = new JLabel("Брой артикули: ");
+	private JTextField quantityTField = new JTextField();
 
-	JLabel customerLabel = new JLabel("Клиент:");
-	static String[] customers = { "Cust1", "Cust2" };
-	static JComboBox<String> customerCombo = new JComboBox<>(customers);
+	private JLabel customerLabel = new JLabel("Клиент:");
+	private static String[] customers = { "Cust1", "Cust2" };
+	private static JComboBox<String> customerCombo = new JComboBox<>(customers);
 
-	JCheckBox isPaidCheckBox = new JCheckBox("Поръчката е ПЛАТЕНА");
+	private JCheckBox isPaidCheckBox = new JCheckBox("Поръчката е ПЛАТЕНА");
 
-	static Connection conn = null;
-	static PreparedStatement state = null;
-	static ResultSet result = null;
-	static MyModel model = null;
-	int id = -1; // selected id
+	private static Connection conn = null;
+	private static PreparedStatement state = null;
+	private static ResultSet result = null;
+	private static MyModel model = null;
+	private int id = -1; // selected id
 
 	public OrdersTablePanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
 		this.conn = conn;
@@ -166,25 +163,6 @@ public class OrdersTablePanel extends JPanel {
 
 	}
 	
-	private void findIndexInComboBox(int row, boolean isCust) {
-		String recentId = "";
-		if(isCust){
-		for(int i = 0; i < this.customerCombo.getItemCount(); i++) {
-			recentId = getCustomerId(i);
-			if(MyFrame.ordersTable.getValueAt(row, 1).toString().equals(recentId)) {
-				customerCombo.setSelectedIndex(i);
-			}
-		}
-		} else {
-			for(int i = 0; i < this.itemCombo.getItemCount(); i++) {
-				recentId = getItemId(i);
-				if(MyFrame.ordersTable.getValueAt(row, 4).toString().equals(recentId)) {
-					itemCombo.setSelectedIndex(i);
-				}
-			}
-		}
-	}
-
 	class AddAction implements ActionListener {
 
 		@Override
@@ -219,7 +197,7 @@ public class OrdersTablePanel extends JPanel {
 
 	}// end AddAction
 
-	public class UpdateActionOrder implements ActionListener {
+	class UpdateActionOrder implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			boolean isPaid = isPaidCheckBox.isSelected() ? true : false;
@@ -322,6 +300,25 @@ public class OrdersTablePanel extends JPanel {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	private void findIndexInComboBox(int row, boolean isCust) {
+		String recentId = "";
+		if(isCust){
+		for(int i = 0; i < this.customerCombo.getItemCount(); i++) {
+			recentId = getCustomerId(i);
+			if(MyFrame.ordersTable.getValueAt(row, 1).toString().equals(recentId)) {
+				customerCombo.setSelectedIndex(i);
+			}
+		}
+		} else {
+			for(int i = 0; i < this.itemCombo.getItemCount(); i++) {
+				recentId = getItemId(i);
+				if(MyFrame.ordersTable.getValueAt(row, 4).toString().equals(recentId)) {
+					itemCombo.setSelectedIndex(i);
+				}
+			}
 		}
 	}
 	

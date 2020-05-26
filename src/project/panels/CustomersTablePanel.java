@@ -10,7 +10,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +17,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 
 import org.h2.jdbc.JdbcSQLException;
@@ -34,35 +32,35 @@ public class CustomersTablePanel extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	JScrollPane scroller = new JScrollPane(MyFrame.customersTable);
+	private JScrollPane scroller = new JScrollPane(MyFrame.customersTable);
 
-	JPanel upPanel = new JPanel();
-	JPanel midPanel = new JPanel();
-	JPanel downPanel = new JPanel();
+	private JPanel upPanel = new JPanel();
+	private JPanel midPanel = new JPanel();
+	private JPanel downPanel = new JPanel();
 
-	JButton addButton = new JButton("Добави");
-	JButton delButton = new JButton("Изтрий");
-	JButton editButton = new JButton("Редактирай");
-	JButton searchButton = new JButton("Търсене по фамилия");
-	JButton refreshButton = new JButton("Обнови");
+	private JButton addButton = new JButton("Добави");
+	private JButton delButton = new JButton("Изтрий");
+	private JButton editButton = new JButton("Редактирай");
+	private JButton searchButton = new JButton("Търсене по фамилия");
+	private JButton refreshButton = new JButton("Обнови");
 
-	JLabel fNameLabel = new JLabel("Първо име:");
-	JLabel lNameLabel = new JLabel("Фамилия:");
-	JLabel addressLabel = new JLabel("Адрес:");
-	JLabel phoneLabel = new JLabel("Телефон:");
-	JLabel genderLabel = new JLabel("Пол:");
+	private JLabel fNameLabel = new JLabel("Първо име:");
+	private JLabel lNameLabel = new JLabel("Фамилия:");
+	private JLabel addressLabel = new JLabel("Адрес:");
+	private JLabel phoneLabel = new JLabel("Телефон:");
+	private JLabel genderLabel = new JLabel("Пол:");
 
-	JTextField fNameTField = new JTextField();
-	JTextField lNameTField = new JTextField();
-	JTextField addressTField = new JTextField();
-	JTextField phoneTField = new JTextField();
-	String[] genders = { "Female", "Male" };
-	JComboBox<String> genderCombo = new JComboBox<>(genders);
-	Connection conn = null;
-	PreparedStatement state = null;
-	ResultSet result = null;
-	MyModel model = null;
-	int id = -1; // selected id
+	private JTextField fNameTField = new JTextField();
+	private JTextField lNameTField = new JTextField();
+	private JTextField addressTField = new JTextField();
+	private JTextField phoneTField = new JTextField();
+	private String[] genders = { "Female", "Male" };
+	private JComboBox<String> genderCombo = new JComboBox<>(genders);
+	private Connection conn = null;
+	private PreparedStatement state = null;
+	private ResultSet result = null;
+	private MyModel model = null;
+	private int id = -1; // selected id
 
 	public CustomersTablePanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
 		this.conn = conn;
@@ -215,7 +213,7 @@ public class CustomersTablePanel extends JPanel {
 
 	}// end AddAction
 
-	public class UpdateActionCustomer implements ActionListener {
+	class UpdateActionCustomer implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			String fName = fNameTField.getText();
@@ -283,7 +281,7 @@ public class CustomersTablePanel extends JPanel {
 		}
 	}
 
-	public void clearFormCustomers() {
+	private void clearFormCustomers() {
 		fNameTField.setText("");
 		lNameTField.setText("");
 		addressTField.setText("");

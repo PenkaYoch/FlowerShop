@@ -38,6 +38,7 @@ public final class TablesUtil {
 	public static final String doubleSearchOrders = "select order_id,  customers.customer_id, fname, lname, items.item_id, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id where lname = ? and category = ?;";
 	public static final String searchOrders = "select order_id,  customers.customer_id, fname, lname, items.item_id, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id where quantity = ?;";
 
+	// Util methods
 	public static final String mainSelect(String columns, String tableName) {
 		return "select "+ columns +" from " + tableName;
 	}

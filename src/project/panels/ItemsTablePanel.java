@@ -30,31 +30,32 @@ public class ItemsTablePanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	JScrollPane scroller = new JScrollPane(MyFrame.itemsTable);
+	private JScrollPane scroller = new JScrollPane(MyFrame.itemsTable);
 
-	JPanel upPanel = new JPanel();
-	JPanel midPanel = new JPanel();
-	JPanel downPanel = new JPanel();
+	private JPanel upPanel = new JPanel();
+	private JPanel midPanel = new JPanel();
+	private JPanel downPanel = new JPanel();
 
-	JButton addButton = new JButton("Добави");
-	JButton delButton = new JButton("Изтрий");
-	JButton editButton = new JButton("Редактирай");
-	JButton searchButton = new JButton("Търсене по категория");
-	JButton refreshButton = new JButton("Обнови");
+	private JButton addButton = new JButton("Добави");
+	private JButton delButton = new JButton("Изтрий");
+	private JButton editButton = new JButton("Редактирай");
+	private JButton searchButton = new JButton("Търсене по категория");
+	private JButton refreshButton = new JButton("Обнови");
 
-	JLabel itemLabel = new JLabel("Име на продукта:");
-	JLabel priceLabel = new JLabel("Единична цена:");
-	JTextField itemTField = new JTextField();
-	JTextField priceTField = new JTextField();
-	JLabel categoryLabel = new JLabel("Категория:");
-	String[] categories = { "Букети", "Кошници", "Саксии", "Градински растения", "Стайни растения" };
-	JComboBox<String> categoryCombo = new JComboBox<>(categories);
-	Connection conn = null;
-	PreparedStatement state = null;
-	ResultSet result = null;
-	MyModel model = null;
-	int id = -1; // selected id
-
+	private JLabel itemLabel = new JLabel("Име на продукта:");
+	private JLabel priceLabel = new JLabel("Единична цена:");
+	private JTextField itemNameTField = new JTextField();
+	private JTextField priceTField = new JTextField();
+	private JLabel categoryLabel = new JLabel("Категория:");
+	
+	private String[] categories = { "Букети", "Кошници", "Саксии", "Градински растения", "Стайни растения" };
+	private JComboBox<String> categoryCombo = new JComboBox<>(categories);
+	private Connection conn = null;
+	private PreparedStatement state = null;
+	private ResultSet result = null;
+	private MyModel model = null;
+	private int id = -1; // selected id
+	
 	public ItemsTablePanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
 		this.conn = conn;
 		this.state = state;
@@ -68,7 +69,7 @@ public class ItemsTablePanel extends JPanel {
 		// upPanel
 		upPanel.setLayout(new GridLayout(3, 2));
 		upPanel.add(itemLabel);
-		upPanel.add(itemTField);
+		upPanel.add(itemNameTField);
 		upPanel.add(priceLabel);
 		upPanel.add(priceTField);
 		upPanel.add(categoryLabel);
@@ -89,8 +90,8 @@ public class ItemsTablePanel extends JPanel {
 		downPanel.add(scroller);
 		MyFrame.itemsTable.addMouseListener(new MouseAction());
 
-	}
-
+	} 
+	
 	class DeleteActionItem implements ActionListener {
 
 		@Override
@@ -125,8 +126,8 @@ public class ItemsTablePanel extends JPanel {
 			int row = MyFrame.itemsTable.getSelectedRow();
 			id = Integer.parseInt(MyFrame.itemsTable.getValueAt(row, 0).toString());
 			if (e.getClickCount() > 1) {
-				itemTField.setText(MyFrame.itemsTable.getValueAt(row, 1).toString());
-				String category = (String) MyFrame.itemsTable.getValueAt(row, 2);
+				itemNameTField.setText(MyFrame.itemsTable.getValueAt(row, 1).toString());
+				String category = MyFrame.itemsTable.getValueAt(row, 2).toString();
 				priceTField.setText(MyFrame.itemsTable.getValueAt(row, 3).toString());
 				int index = 0;
 				switch (category) {
@@ -181,7 +182,7 @@ public class ItemsTablePanel extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			String itemName = itemTField.getText();
+			String itemName = itemNameTField.getText();
 			String price = priceTField.getText();
 			String category = categoryCombo.getSelectedItem().toString();
 
@@ -211,10 +212,10 @@ public class ItemsTablePanel extends JPanel {
 
 	}// end AddAction
 
-	public class UpdateActionItem implements ActionListener {
+	class UpdateActionItem implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			String itemName = itemTField.getText();
+			String itemName = itemNameTField.getText();
 			double price = Double.parseDouble(priceTField.getText());
 			String category = categoryCombo.getSelectedItem().toString();
 
@@ -275,8 +276,8 @@ public class ItemsTablePanel extends JPanel {
 		}
 	}
 
-	public void clearFormItems() {
-		itemTField.setText("");
+	private void clearFormItems() {
+		itemNameTField.setText("");
 		priceTField.setText("");
 	}
 

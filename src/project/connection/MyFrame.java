@@ -33,6 +33,7 @@ public class MyFrame extends JFrame{
 	public static JTable customersTable = new JTable();
 	public static JTable ordersTable = new JTable();
 
+	//ItemsTablePanel(conn, state, result, model) -> извикване на конструктора на ItemsTablePanel
 	ItemsTablePanel panel1 = new ItemsTablePanel(conn, state, result, model);
 	CustomersTablePanel panel2 = new CustomersTablePanel(conn, state, result, model);
 	OrdersTablePanel panel3 = new OrdersTablePanel(conn, state, result, model);
@@ -59,7 +60,7 @@ public class MyFrame extends JFrame{
 			columns = TablesUtil.itemsColumns;
 			itemsTable.setModel(getModelOfTable(TablesUtil.itemsTableName, columns));
 			break;
-
+			
 		case TablesUtil.customersTableName:
 			columns = TablesUtil.customersColumns;
 			customersTable.setModel(getModelOfTable(TablesUtil.customersTableName, columns));
@@ -96,6 +97,7 @@ public class MyFrame extends JFrame{
 	public static MyModel getFromTableOrders() {
 		conn = DBConnector.getConnection();
 		String sql = TablesUtil.selectFromOrders;
+		
 		try {
 			state = conn.prepareStatement(sql);
 			result = state.executeQuery();
