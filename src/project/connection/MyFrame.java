@@ -1,4 +1,5 @@
 package project.connection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,8 +14,8 @@ import project.panels.ItemsTablePanel;
 import project.panels.OrdersTablePanel;
 import project.utils.TablesUtil;
 
-public class MyFrame extends JFrame{
-	
+public class MyFrame extends JFrame {
+
 	/**
 	 * 
 	 * @author Penka Yochkova
@@ -22,23 +23,22 @@ public class MyFrame extends JFrame{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	static Connection conn = null;
 	static PreparedStatement state = null;
 	static ResultSet result = null;
 	static MyModel model = null;
-	int id = -1; //selected id
+	int id = -1; // selected id
 	JTabbedPane tab = new JTabbedPane();
 	public static JTable itemsTable = new JTable();
 	public static JTable customersTable = new JTable();
 	public static JTable ordersTable = new JTable();
 
-	//ItemsTablePanel(conn, state, result, model) -> извикване на конструктора на ItemsTablePanel
-	ItemsTablePanel panel1 = new ItemsTablePanel(conn, state, result, model);
-	CustomersTablePanel panel2 = new CustomersTablePanel(conn, state, result, model);
-	OrdersTablePanel panel3 = new OrdersTablePanel(conn, state, result, model);
-	DoubleSearchPanel panel4 = new DoubleSearchPanel(conn, state, result, model);
-	
+	ItemsTablePanel panel1 = new ItemsTablePanel();
+	CustomersTablePanel panel2 = new CustomersTablePanel();
+	OrdersTablePanel panel3 = new OrdersTablePanel();
+	DoubleSearchPanel panel4 = new DoubleSearchPanel();
+
 	public MyFrame() {
 		this.setVisible(true);
 		this.setSize(900, 700);
@@ -51,8 +51,8 @@ public class MyFrame extends JFrame{
 		MyFrame.getModelOfTable(TablesUtil.itemsTableName);
 		MyFrame.getModelOfTable(TablesUtil.customersTableName);
 		MyFrame.ordersTable.setModel(getFromTableOrders());
-	}//end constructor
-	
+	}// end constructor
+
 	public static void getModelOfTable(String tableName) {
 		String columns = null;
 		switch (tableName) {
@@ -60,12 +60,12 @@ public class MyFrame extends JFrame{
 			columns = TablesUtil.itemsColumns;
 			itemsTable.setModel(getModelOfTable(TablesUtil.itemsTableName, columns));
 			break;
-			
+
 		case TablesUtil.customersTableName:
 			columns = TablesUtil.customersColumns;
 			customersTable.setModel(getModelOfTable(TablesUtil.customersTableName, columns));
 			break;
-			
+
 		case TablesUtil.ordersTableName:
 			ordersTable.setModel(getFromTableOrders());
 			break;
@@ -74,12 +74,12 @@ public class MyFrame extends JFrame{
 			break;
 		}
 	}
-	
+
 	@SuppressWarnings("finally")
 	public static MyModel getModelOfTable(String tableName, String columns) {
 		conn = DBConnector.getConnection();
-		String sql = TablesUtil.mainSelect(columns, tableName); 
-		
+		String sql = TablesUtil.mainSelect(columns, tableName);
+
 		try {
 			state = conn.prepareStatement(sql);
 			result = state.executeQuery();
@@ -88,16 +88,16 @@ public class MyFrame extends JFrame{
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			return model;
 		}
 	}
-	
+
 	@SuppressWarnings("finally")
 	public static MyModel getFromTableOrders() {
 		conn = DBConnector.getConnection();
 		String sql = TablesUtil.selectFromOrders;
-		
+
 		try {
 			state = conn.prepareStatement(sql);
 			result = state.executeQuery();
@@ -106,9 +106,9 @@ public class MyFrame extends JFrame{
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			return model;
 		}
 	}
-	
-}//end class MyFrame
+
+}// end class MyFrame

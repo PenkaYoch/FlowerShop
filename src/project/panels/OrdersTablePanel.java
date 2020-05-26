@@ -64,11 +64,7 @@ public class OrdersTablePanel extends JPanel {
 	private static MyModel model = null;
 	private int id = -1; // selected id
 
-	public OrdersTablePanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
-		this.conn = conn;
-		this.state = state;
-		this.result = result;
-		this.model = model;
+	public OrdersTablePanel() {
 		this.add(upPanel);
 		this.add(midPanel);
 		this.add(downPanel);
@@ -162,7 +158,7 @@ public class OrdersTablePanel extends JPanel {
 		}
 
 	}
-	
+
 	class AddAction implements ActionListener {
 
 		@Override
@@ -185,13 +181,15 @@ public class OrdersTablePanel extends JPanel {
 					state.execute();
 					MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 					clearFormOrders();
-				} catch(JdbcSQLException e1) {
-					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+				} catch (JdbcSQLException e1) {
+					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
 			} else {
-				JOptionPane.showMessageDialog(null, "Въведете количество различно от нула!", null, JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, "Въведете количество различно от нула!", null,
+						JOptionPane.ERROR_MESSAGE);
 			}
 		}// end method
 
@@ -201,7 +199,7 @@ public class OrdersTablePanel extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			boolean isPaid = isPaidCheckBox.isSelected() ? true : false;
-			int quantity = quantityTField.getText().isEmpty() ? 0 : Integer.parseInt(quantityTField.getText()); 
+			int quantity = quantityTField.getText().isEmpty() ? 0 : Integer.parseInt(quantityTField.getText());
 			String customer_ID = getCustomerId();
 			String item_ID = getItemId();
 
@@ -302,44 +300,42 @@ public class OrdersTablePanel extends JPanel {
 			e.printStackTrace();
 		}
 	}
-	
+
 	private void findIndexInComboBox(int row, boolean isCust) {
 		String recentId = "";
-		if(isCust){
-		for(int i = 0; i < this.customerCombo.getItemCount(); i++) {
-			recentId = getCustomerId(i);
-			if(MyFrame.ordersTable.getValueAt(row, 1).toString().equals(recentId)) {
-				customerCombo.setSelectedIndex(i);
+		if (isCust) {
+			for (int i = 0; i < this.customerCombo.getItemCount(); i++) {
+				recentId = getCustomerId(i);
+				if (MyFrame.ordersTable.getValueAt(row, 1).toString().equals(recentId)) {
+					customerCombo.setSelectedIndex(i);
+				}
 			}
-		}
 		} else {
-			for(int i = 0; i < this.itemCombo.getItemCount(); i++) {
+			for (int i = 0; i < this.itemCombo.getItemCount(); i++) {
 				recentId = getItemId(i);
-				if(MyFrame.ordersTable.getValueAt(row, 4).toString().equals(recentId)) {
+				if (MyFrame.ordersTable.getValueAt(row, 4).toString().equals(recentId)) {
 					itemCombo.setSelectedIndex(i);
 				}
 			}
 		}
 	}
-	
+
 	private String getCustomerId() {
 		return customerCombo.getSelectedItem().toString().substring(0,
 				customerCombo.getSelectedItem().toString().indexOf(':'));
 	}
-	
+
 	private String getCustomerId(int index) {
 		return customerCombo.getItemAt(index).toString().substring(0,
 				customerCombo.getItemAt(index).toString().indexOf(':'));
 	}
-	
+
 	private String getItemId() {
-		return itemCombo.getSelectedItem().toString().substring(0,
-				itemCombo.getSelectedItem().toString().indexOf(':'));
+		return itemCombo.getSelectedItem().toString().substring(0, itemCombo.getSelectedItem().toString().indexOf(':'));
 	}
-	
+
 	private String getItemId(int index) {
-		return itemCombo.getItemAt(index).toString().substring(0,
-				itemCombo.getItemAt(index).toString().indexOf(':'));
+		return itemCombo.getItemAt(index).toString().substring(0, itemCombo.getItemAt(index).toString().indexOf(':'));
 	}
-	
+
 }

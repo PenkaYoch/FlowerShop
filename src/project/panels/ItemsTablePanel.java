@@ -47,7 +47,7 @@ public class ItemsTablePanel extends JPanel {
 	private JTextField itemNameTField = new JTextField();
 	private JTextField priceTField = new JTextField();
 	private JLabel categoryLabel = new JLabel("Категория:");
-	
+
 	private String[] categories = { "Букети", "Кошници", "Саксии", "Градински растения", "Стайни растения" };
 	private JComboBox<String> categoryCombo = new JComboBox<>(categories);
 	private Connection conn = null;
@@ -55,12 +55,8 @@ public class ItemsTablePanel extends JPanel {
 	private ResultSet result = null;
 	private MyModel model = null;
 	private int id = -1; // selected id
-	
-	public ItemsTablePanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
-		this.conn = conn;
-		this.state = state;
-		this.result = result;
-		this.model = model;
+
+	public ItemsTablePanel() {
 		this.add(upPanel);
 		this.add(midPanel);
 		this.add(downPanel);
@@ -90,8 +86,8 @@ public class ItemsTablePanel extends JPanel {
 		downPanel.add(scroller);
 		MyFrame.itemsTable.addMouseListener(new MouseAction());
 
-	} 
-	
+	}
+
 	class DeleteActionItem implements ActionListener {
 
 		@Override
@@ -110,8 +106,9 @@ public class ItemsTablePanel extends JPanel {
 			} catch (JdbcSQLException e1) {
 //				e1.printStackTrace(System.out);
 				JOptionPane.showMessageDialog(null,
-						"Не можете да изтриете този запис в таблицата, защото участва в таблицата с поръчките! " + e1.getMessage(), null,
-						JOptionPane.ERROR_MESSAGE);
+						"Не можете да изтриете този запис в таблицата, защото участва в таблицата с поръчките! "
+								+ e1.getMessage(),
+						null, JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -200,8 +197,9 @@ public class ItemsTablePanel extends JPanel {
 					clearFormItems();
 					MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 					OrdersTablePanel.refreshComboItems();
-				} catch(JdbcSQLException e1) {
-					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+				} catch (JdbcSQLException e1) {
+					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -234,8 +232,9 @@ public class ItemsTablePanel extends JPanel {
 				MyFrame.getModelOfTable(TablesUtil.itemsTableName);
 				MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 				OrdersTablePanel.refreshComboItems();
-			} catch(JdbcSQLException e1) {
-				JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+			} catch (JdbcSQLException e1) {
+				JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+						JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

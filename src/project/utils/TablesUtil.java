@@ -40,7 +40,7 @@ public final class TablesUtil {
 
 	// Util methods
 	public static final String mainSelect(String columns, String tableName) {
-		return "select "+ columns +" from " + tableName;
+		return "select " + columns + " from " + tableName;
 	}
 
 	public static final String searchInTable(String tableName) {
@@ -58,7 +58,7 @@ public final class TablesUtil {
 		case ordersTableName:
 			return searchOrders;
 		}
-		return "select "+ columns +" from "+ tableName +" where "+ condition +" = ?";
+		return "select " + columns + " from " + tableName + " where " + condition + " = ?";
 	}
 
 }

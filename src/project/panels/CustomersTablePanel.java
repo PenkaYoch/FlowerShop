@@ -62,11 +62,7 @@ public class CustomersTablePanel extends JPanel {
 	private MyModel model = null;
 	private int id = -1; // selected id
 
-	public CustomersTablePanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
-		this.conn = conn;
-		this.state = state;
-		this.result = result;
-		this.model = model;
+	public CustomersTablePanel() {
 		this.add(upPanel);
 		this.add(midPanel);
 		this.add(downPanel);
@@ -119,8 +115,9 @@ public class CustomersTablePanel extends JPanel {
 			} catch (JdbcSQLException e1) {
 //				e1.printStackTrace(System.out);
 				JOptionPane.showMessageDialog(null,
-						"Не можете да изтриете този запис в таблицата, защото участва в таблицата с поръчките! " + e1.getMessage(), null,
-						JOptionPane.ERROR_MESSAGE);
+						"Не можете да изтриете този запис в таблицата, защото участва в таблицата с поръчките! "
+								+ e1.getMessage(),
+						null, JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
@@ -200,8 +197,9 @@ public class CustomersTablePanel extends JPanel {
 					clearFormCustomers();
 					MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 					OrdersTablePanel.refreshComboCustomers();
-				} catch(JdbcSQLException e1) {
-					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+				} catch (JdbcSQLException e1) {
+					JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+							JOptionPane.ERROR_MESSAGE);
 				} catch (SQLException e1) {
 					e1.printStackTrace();
 				}
@@ -221,7 +219,7 @@ public class CustomersTablePanel extends JPanel {
 			String address = addressTField.getText();
 			String phone = phoneTField.getText();
 			String gender = genderCombo.getSelectedIndex() == 0 ? "f" : "m";
-			
+
 			conn = DBConnector.getConnection();
 			String sql = TablesUtil.updateCustomers;
 
@@ -240,8 +238,9 @@ public class CustomersTablePanel extends JPanel {
 				MyFrame.getModelOfTable(TablesUtil.customersTableName);
 				MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 				OrdersTablePanel.refreshComboCustomers();
-			} catch(JdbcSQLException e1) {
-				JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null, JOptionPane.ERROR_MESSAGE);
+			} catch (JdbcSQLException e1) {
+				JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+						JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block
 				e1.printStackTrace();

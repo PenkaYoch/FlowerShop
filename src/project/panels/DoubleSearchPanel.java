@@ -43,11 +43,7 @@ public class DoubleSearchPanel extends JPanel {
 	private ResultSet result = null;
 	private MyModel model = null;
 
-	public DoubleSearchPanel(Connection conn, PreparedStatement state, ResultSet result, MyModel model) {
-		this.conn = conn;
-		this.state = state;
-		this.result = result;
-		this.model = model;
+	public DoubleSearchPanel() {
 		this.add(upPanel);
 		this.add(midPanel);
 		this.add(downPanel);
