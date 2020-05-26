@@ -233,7 +233,7 @@ public class ItemsTablePanel extends JPanel {
 				MyFrame.getModelOfTable(TablesUtil.ordersTableName);
 				OrdersTablePanel.refreshComboItems();
 			} catch (JdbcSQLException e1) {
-				JOptionPane.showMessageDialog(null, "Некоректни данни! " + e1.getMessage(), null,
+				JOptionPane.showMessageDialog(null, "Некоректни данни! ", null,
 						JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				// TODO Auto-generated catch block

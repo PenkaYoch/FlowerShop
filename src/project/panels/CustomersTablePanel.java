@@ -115,8 +115,7 @@ public class CustomersTablePanel extends JPanel {
 			} catch (JdbcSQLException e1) {
 //				e1.printStackTrace(System.out);
 				JOptionPane.showMessageDialog(null,
-						"Не можете да изтриете този запис в таблицата, защото участва в таблицата с поръчките! "
-								+ e1.getMessage(),
+						"Не можете да изтриете този запис в таблицата, защото участва в таблицата с поръчките! ",
 						null, JOptionPane.ERROR_MESSAGE);
 			} catch (SQLException e1) {
 				e1.printStackTrace();
