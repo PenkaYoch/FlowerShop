@@ -13,7 +13,7 @@ public final class TablesUtil {
 
 	// Queries
 	/* Select */
-	public static final String selectFromOrders = "select  order_id, customers.customer_id, fname, lname, orders.item_id, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id;";
+	public static final String selectFromOrders = "select  order_id, customers.customer_id, fname, lname, orders.item_id, name, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id;";
 
 	/* Insert */
 	public static final String insertItems = "insert into items values(null,?,?,?);";
@@ -36,6 +36,7 @@ public final class TablesUtil {
 
 	/* Double search */
 	public static final String doubleSearchOrders = "select order_id,  customers.customer_id, fname, lname, items.item_id, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id where lname = ? and category = ?;";
+	public static final String doubleSearchOrders2 = "select order_id,  customers.customer_id, fname, lname, items.item_id, name, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id where fname = ? and name = ?;";
 	public static final String searchOrders = "select order_id,  customers.customer_id, fname, lname, items.item_id, unitprice, quantity, category, ispaid from orders join items on items.item_id = orders.item_id join customers on customers.customer_id = orders.customer_id where quantity = ?;";
 
 	// Util methods

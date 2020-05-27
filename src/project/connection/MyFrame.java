@@ -10,6 +10,7 @@ import javax.swing.JTable;
 
 import project.panels.CustomersTablePanel;
 import project.panels.DoubleSearchPanel;
+import project.panels.DoubleSearchPanel2;
 import project.panels.ItemsTablePanel;
 import project.panels.OrdersTablePanel;
 import project.utils.TablesUtil;
@@ -38,6 +39,7 @@ public class MyFrame extends JFrame {
 	CustomersTablePanel panel2 = new CustomersTablePanel();
 	OrdersTablePanel panel3 = new OrdersTablePanel();
 	DoubleSearchPanel panel4 = new DoubleSearchPanel();
+	DoubleSearchPanel2 panel5 = new DoubleSearchPanel2();
 
 	public MyFrame() {
 		this.setVisible(true);
@@ -46,7 +48,8 @@ public class MyFrame extends JFrame {
 		tab.add("Продукти", panel1);
 		tab.add("Клиенти", panel2);
 		tab.add("Поръчки", panel3);
-		tab.add("Справка", panel4);
+		tab.add("Справка1", panel4);
+		tab.add("Справка2", panel5);
 		this.add(tab);
 		MyFrame.getModelOfTable(TablesUtil.itemsTableName);
 		MyFrame.getModelOfTable(TablesUtil.customersTableName);

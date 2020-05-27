@@ -127,8 +127,8 @@ public class OrdersTablePanel extends JPanel {
 			if (e.getClickCount() > 1) {
 				findIndexInComboBox(row, true);
 				findIndexInComboBox(row, false);
-				quantityTField.setText(MyFrame.ordersTable.getValueAt(row, 6).toString());
-				boolean isPaid = (boolean) MyFrame.ordersTable.getValueAt(row, 8);
+				quantityTField.setText(MyFrame.ordersTable.getValueAt(row, 7).toString());
+				boolean isPaid = (boolean) MyFrame.ordersTable.getValueAt(row, 9);
 				isPaidCheckBox.setSelected(isPaid);
 			}
 		}
